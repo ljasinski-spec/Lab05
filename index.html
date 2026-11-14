@@ -192,7 +192,7 @@ function usunBlad(pole, komunikat)
 function tylkoCyfry()
 {
     var telefon = document.getElementById("telefon");
-    telefon.value = telefon.value.replace(/[^0-9]/g, '');
+    telefon.value = telefon.value.replace(/[^0-9]/, '');
 }
 
 function sprawdz()
@@ -207,24 +207,14 @@ var wojewodztwo = document.getElementById("wojewodztwo").value;
 var haslo = document.getElementById("haslo").value;
 var email = document.getElementById("email").value;
 var uwagi = document.getElementById("uwagi").value;
-
 var poprawny = true;
-
 var regImie = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+$/;
-
 var regNazwisko = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
-
 var regUlica = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 .\/-]*$/;
-
 var regMiasto = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,3}$/;
-
 var regTelefon = /^[0-9]{9}$/;
-
 var regHaslo = /^(?=.*[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ])(?=.*[0-9]).{8,}$/;
-
 var regEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
 if (!regImie.test(imie) || imie.length < 2 || imie.length > 50)
 {
     blad("imie", "bladImie", "Imię musi mieć od 2 do 50 znaków i zaczynać się wielką literą.");
@@ -234,7 +224,6 @@ else
 {
     usunBlad("imie", "bladImie");
 }
-
 if (!regNazwisko.test(nazwisko) || nazwisko.length < 2 || nazwisko.length > 50)
 {
     blad("nazwisko", "bladNazwisko", "Nazwisko musi mieć od 2 do 50 znaków i maksymalnie 2 człony.");
