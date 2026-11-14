@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Lab03_1</title>
+
+<style>
+a
+{
+font-size: 20px;
+display: flex;
+justify-content: center;
+font-weight: bold;
+}
+body
+{
+display: flex;
+font-family: Arial;
+background-color: lightgrey;
+justify-content: center;
+margin: 100px;
+}
+form
+{
+background-color: white;
+padding: 30px;
+width: 300px;
+border-radius: 12px;
+}
+input:not([type="checkbox"])
+{
+font-size: 14px;
+margin-bottom: 4px;
+padding: 6px;
+width: 90%;
+border-radius: 6px;
+border-style: solid;
+border-color: lightgrey;
+border-width: 2px;
+}
+select
+{
+font-size: 14px;
+margin-bottom: 4px;
+padding: 6px;
+width: 96%;
+border-radius: 6px;
+border: 2px solid lightgrey;
+}
+textarea
+{
+font-size: 14px;
+margin-bottom: 4px;
+padding: 6px;
+width: 90%;
+height: 80px;
+border-radius: 6px;
+border: 2px solid lightgrey;
+resize: vertical;
+}
+.komunikat
+{
+color: red;
+font-size: 12px;
+margin-bottom: 9px;
+}
+input[type="submit"]
+{
+background-color: LightSkyBlue;
+padding: 12px;
+color: white;
+font-weight: bold;
+font-size: 18px;
+border-radius: 10px;
+border: 0px;
+width: 100%;
+cursor: pointer;
+}
+input[type="checkbox"]
+{
+font-size: 14px;
+margin-bottom: 15px;
+}
+input[type="submit"]:hover
+{
+background-color: steelblue;
+}
+</style>
+</head>
+
+<body>
+
+<form action="" method="post" id="formularz"
+onsubmit="return sprawdz()" novalidate>
+
+<a>FORMULARZ</a><br><br>
+
+Imie:
+<input type="text" name="imie"
+minlength="2" maxlength="50"
+oninput="usunBlad(this)">
+<div class="komunikat"></div>
+
+Nazwisko:
+<input type="text" name="nazwisko"
+minlength="2" maxlength="100"
+oninput="usunBlad(this)">
+<div class="komunikat"></div>
+
+Ulica:
+<input type="text" name="ulica"
+minlength="2" maxlength="50"
+oninput="usunBlad(this)">
+<div class="komunikat"></div>
+
+Miasto:
+<input type="text" name="miasto"
+minlength="2" maxlength="50"
+oninput="usunBlad(this)">
+<div class="komunikat"></div>
+
+Data urodzenia:
+<input type="date" name="data"
+onchange="usunBlad(this)">
+<div class="komunikat"></div>
+
+Telefon:
+<input type="tel" name="telefon"
+maxlength="9"
+inputmode="numeric"
+oninput="this.value=this.value.replace(/\D/g, ''); usunBlad(this)"> <br>
+<div class="komunikat"></div>
+
+Województwo:
+<select name="wojewodztwo"
+onchange="usunBlad(this)">
+  <option value="">Wybierz województwo</option>
+  <option value="mazowieckie">Mazowieckie</option>
+  <option value="dolnoslaskie">Dolnośląskie</option>
+  <option value="kujawskopomorskie">Kujawsko-pomorskie</option>
+  <option value="lubuskie">Lubuskie</option>
+  <option value="lubelskie">Lubelskie</option>
+  <option value="lodzkie">Łódzkie</option>
+  <option value="malopolskie">Małopolskie</option>
+  <option value="opolskie">Opolskie</option>
+  <option value="podkarpackie">Podkarpackie</option>
+  <option value="podlaskie">Podlaskie</option>
+  <option value="pomorskie">Pomorskie</option>
+  <option value="slaskie">Śląskie</option>
+  <option value="swietokrzyskie">Świętokrzyskie</option>
+  <option value="warminsko-mazurskie">Warmińsko-mazurskie</option>
+  <option value="wielkopolskie">Wielkopolskie</option>
+  <option value="zachodniopomorskie">Zachodniopomorskie</option>
+</select>
+<div class="komunikat"></div>
+
+Hasło:
+<input type="password" name="haslo"
+oninput="usunBlad(this)">
+<div class="komunikat"></div>
+
+Email:
+<input type="email" name="email"
+oninput="usunBlad(this)">
+<div class="komunikat"></div>
+
+Prawo jazdy:
+<input type="checkbox" name="prawojazdy"> <br>
+
+Uwagi:
+<textarea name="uwagi" maxlength="250"
+oninput="usunBlad(this)"></textarea>
+<div class="komunikat"></div>
+
+<input type="submit" value="OK" name="p1">
+
+</form>
+
+
+<script>
+function blad(pole, tekst)
+{
+    pole.style.borderColor = "red";
+    pole.nextElementSibling.textContent = tekst;
+}
+
+function usunBlad(pole)
+{
+    pole.style.borderColor = "lightgrey";
+    pole.nextElementSibling.textContent = "";
+}
+
+function sprawdz()
+{
+var f = document.getElementById("formularz");
+
+var imie = f.elements["imie"];
+var nazwisko = f.elements["nazwisko"];
+var ulica = f.elements["ulica"];
+var miasto = f.elements["miasto"];
+var data = f.elements["data"];
+var telefon = f.elements["telefon"];
+var wojewodztwo = f.elements["wojewodztwo"];
+var haslo = f.elements["haslo"];
+var email = f.elements["email"];
+var uwagi = f.elements["uwagi"];
+
+var poprawny = true;
+
+var regImie = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+$/;
+
+var regNazwisko = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ /-][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
+
+var regUlica = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 .\/-]*$/;
+
+var regMiasto = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ /-][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,3}$/;
+
+var regTelefon = /^[0-9]{9}$/;
+
+var regHaslo = /^(?=.*[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ])(?=.*[0-9]).{8,}$/;
+
+var regEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+if (!regImie.test(imie.value) || imie.value.length < 2 || imie.value.length > 50)
+{
+    blad(imie, "Imię musi mieć od 2 do 50 znaków i zaczynać się wielką literą.");
+    poprawny = false;
+}
+
+if (!regNazwisko.test(nazwisko.value) || nazwisko.value.length < 2 || nazwisko.value.length > 50)
+{
+    blad(nazwisko, "Nazwisko musi mieć od 2 do 50 znaków i maksymalnie 2 człony.");
+    poprawny = false;
+}
+
+if (!regUlica.test(ulica.value) || ulica.value.length < 2 || ulica.value.length > 50)
+{
+    blad(ulica, "Ulica musi mieć od 2 do 50 znaków i zaczynać się wielką literą.");
+    poprawny = false;
+}
+
+if (!regMiasto.test(miasto.value) || miasto.value.length < 2 || miasto.value.length > 50)
+{
+    blad(miasto, "Miasto musi mieć od 2 do 50 znaków i maksymalnie 4 człony.");
+    poprawny = false;
+}
+
+if (data.value == "")
+{
+    blad(data, "Podaj datę urodzenia!");
+    poprawny = false;
+}
+
+if (!regTelefon.test(telefon.value))
+{
+    blad(telefon, "Telefon musi mieć dokładnie 9 cyfr!");
+    poprawny = false;
+}
+
+if (wojewodztwo.value == "")
+{
+    blad(wojewodztwo, "Wybierz województwo!");
+    poprawny = false;
+}
+
+if (!regHaslo.test(haslo.value))
+{
+    blad(haslo, "Hasło musi mieć minimum 8 znaków, w tym literę i cyfrę!");
+    poprawny = false;
+}
+
+if (!regEmail.test(email.value))
+{
+    blad(email, "Podaj poprawny adres e-mail!");
+    poprawny = false;
+}
+
+if (uwagi.value.length > 250)
+{
+    blad(uwagi, "Uwagi mogą mieć maksymalnie 250 znaków!");
+    poprawny = false;
+}
+
+return poprawny;
+}
+</script>
+
+</body>
+</html>
