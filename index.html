@@ -97,44 +97,43 @@ onsubmit="return sprawdz()" novalidate>
 <a>FORMULARZ</a><br><br>
 
 Imie:
-<input type="text" name="imie"
+<input type="text" id="imie" name="imie"
 minlength="2" maxlength="50"
-oninput="usunBlad(this)">
-<div class="komunikat"></div>
+oninput="usunBlad('imie', 'bladImie')">
+<div id="bladImie" class="komunikat"></div>
 
 Nazwisko:
-<input type="text" name="nazwisko"
-minlength="2" maxlength="100"
-oninput="usunBlad(this)">
-<div class="komunikat"></div>
+<input type="text" id="nazwisko" name="nazwisko"
+minlength="2" maxlength="50"
+oninput="usunBlad('nazwisko', 'bladNazwisko')">
+<div id="bladNazwisko" class="komunikat"></div>
 
 Ulica:
-<input type="text" name="ulica"
+<input type="text" id="ulica" name="ulica"
 minlength="2" maxlength="50"
-oninput="usunBlad(this)">
-<div class="komunikat"></div>
+oninput="usunBlad('ulica', 'bladUlica')">
+<div id="bladUlica" class="komunikat"></div>
 
 Miasto:
-<input type="text" name="miasto"
+<input type="text" id="miasto" name="miasto"
 minlength="2" maxlength="50"
-oninput="usunBlad(this)">
-<div class="komunikat"></div>
+oninput="usunBlad('miasto', 'bladMiasto')">
+<div id="bladMiasto" class="komunikat"></div>
 
 Data urodzenia:
-<input type="date" name="data"
-onchange="usunBlad(this)">
-<div class="komunikat"></div>
+<input type="date" id="data" name="data"
+onchange="usunBlad('data', 'bladData')">
+<div id="bladData" class="komunikat"></div>
 
 Telefon:
-<input type="tel" name="telefon"
+<input type="tel" id="telefon" name="telefon"
 maxlength="9"
-inputmode="numeric"
-oninput="this.value=this.value.replace(/\D/g, ''); usunBlad(this)"> <br>
-<div class="komunikat"></div>
+oninput="tylkoCyfry(); usunBlad('telefon', 'bladTelefon')">
+<div id="bladTelefon" class="komunikat"></div>
 
 Województwo:
-<select name="wojewodztwo"
-onchange="usunBlad(this)">
+<select id="wojewodztwo" name="wojewodztwo"
+onchange="usunBlad('wojewodztwo', 'bladWojewodztwo')">
   <option value="">Wybierz województwo</option>
   <option value="mazowieckie">Mazowieckie</option>
   <option value="dolnoslaskie">Dolnośląskie</option>
@@ -153,68 +152,71 @@ onchange="usunBlad(this)">
   <option value="wielkopolskie">Wielkopolskie</option>
   <option value="zachodniopomorskie">Zachodniopomorskie</option>
 </select>
-<div class="komunikat"></div>
+<div id="bladWojewodztwo" class="komunikat"></div>
 
 Hasło:
-<input type="password" name="haslo"
-oninput="usunBlad(this)">
-<div class="komunikat"></div>
+<input type="password" id="haslo" name="haslo"
+oninput="usunBlad('haslo', 'bladHaslo')">
+<div id="bladHaslo" class="komunikat"></div>
 
 Email:
-<input type="email" name="email"
-oninput="usunBlad(this)">
-<div class="komunikat"></div>
+<input type="email" id="email" name="email"
+oninput="usunBlad('email', 'bladEmail')">
+<div id="bladEmail" class="komunikat"></div>
 
 Prawo jazdy:
 <input type="checkbox" name="prawojazdy"> <br>
 
 Uwagi:
-<textarea name="uwagi" maxlength="250"
-oninput="usunBlad(this)"></textarea>
-<div class="komunikat"></div>
+<textarea id="uwagi" name="uwagi" maxlength="250"
+oninput="usunBlad('uwagi', 'bladUwagi')"></textarea>
+<div id="bladUwagi" class="komunikat"></div>
 
 <input type="submit" value="OK" name="p1">
 
 </form>
 
-
 <script>
-function blad(pole, tekst)
+function blad(pole, komunikat, tekst)
 {
-    pole.style.borderColor = "red";
-    pole.nextElementSibling.textContent = tekst;
+    document.getElementById(pole).style.borderColor = "red";
+    document.getElementById(komunikat).textContent = tekst;
 }
 
-function usunBlad(pole)
+function usunBlad(pole, komunikat)
 {
-    pole.style.borderColor = "lightgrey";
-    pole.nextElementSibling.textContent = "";
+    document.getElementById(pole).style.borderColor = "lightgrey";
+    document.getElementById(komunikat).textContent = "";
+}
+
+function tylkoCyfry()
+{
+    var telefon = document.getElementById("telefon");
+    telefon.value = telefon.value.replace(/[^0-9]/g, '');
 }
 
 function sprawdz()
 {
-var f = document.getElementById("formularz");
-
-var imie = f.elements["imie"];
-var nazwisko = f.elements["nazwisko"];
-var ulica = f.elements["ulica"];
-var miasto = f.elements["miasto"];
-var data = f.elements["data"];
-var telefon = f.elements["telefon"];
-var wojewodztwo = f.elements["wojewodztwo"];
-var haslo = f.elements["haslo"];
-var email = f.elements["email"];
-var uwagi = f.elements["uwagi"];
+var imie = document.getElementById("imie").value;
+var nazwisko = document.getElementById("nazwisko").value;
+var ulica = document.getElementById("ulica").value;
+var miasto = document.getElementById("miasto").value;
+var data = document.getElementById("data").value;
+var telefon = document.getElementById("telefon").value;
+var wojewodztwo = document.getElementById("wojewodztwo").value;
+var haslo = document.getElementById("haslo").value;
+var email = document.getElementById("email").value;
+var uwagi = document.getElementById("uwagi").value;
 
 var poprawny = true;
 
 var regImie = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+$/;
 
-var regNazwisko = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ /-][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
+var regNazwisko = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
 
 var regUlica = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9 .\/-]*$/;
 
-var regMiasto = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ /-][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,3}$/;
+var regMiasto = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,3}$/;
 
 var regTelefon = /^[0-9]{9}$/;
 
@@ -223,64 +225,104 @@ var regHaslo = /^(?=.*[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ])(?=.*[0-9]).{
 var regEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-if (!regImie.test(imie.value) || imie.value.length < 2 || imie.value.length > 50)
+if (!regImie.test(imie) || imie.length < 2 || imie.length > 50)
 {
-    blad(imie, "Imię musi mieć od 2 do 50 znaków i zaczynać się wielką literą.");
+    blad("imie", "bladImie", "Imię musi mieć od 2 do 50 znaków i zaczynać się wielką literą.");
     poprawny = false;
 }
-
-if (!regNazwisko.test(nazwisko.value) || nazwisko.value.length < 2 || nazwisko.value.length > 50)
+else
 {
-    blad(nazwisko, "Nazwisko musi mieć od 2 do 50 znaków i maksymalnie 2 człony.");
-    poprawny = false;
+    usunBlad("imie", "bladImie");
 }
 
-if (!regUlica.test(ulica.value) || ulica.value.length < 2 || ulica.value.length > 50)
+if (!regNazwisko.test(nazwisko) || nazwisko.length < 2 || nazwisko.length > 50)
 {
-    blad(ulica, "Ulica musi mieć od 2 do 50 znaków i zaczynać się wielką literą.");
+    blad("nazwisko", "bladNazwisko", "Nazwisko musi mieć od 2 do 50 znaków i maksymalnie 2 człony.");
     poprawny = false;
 }
-
-if (!regMiasto.test(miasto.value) || miasto.value.length < 2 || miasto.value.length > 50)
+else
 {
-    blad(miasto, "Miasto musi mieć od 2 do 50 znaków i maksymalnie 4 człony.");
-    poprawny = false;
+    usunBlad("nazwisko", "bladNazwisko");
 }
 
-if (data.value == "")
+if (!regUlica.test(ulica) || ulica.length < 2 || ulica.length > 50)
 {
-    blad(data, "Podaj datę urodzenia!");
+    blad("ulica", "bladUlica", "Ulica musi mieć od 2 do 50 znaków i zaczynać się wielką literą.");
     poprawny = false;
 }
-
-if (!regTelefon.test(telefon.value))
+else
 {
-    blad(telefon, "Telefon musi mieć dokładnie 9 cyfr!");
-    poprawny = false;
+    usunBlad("ulica", "bladUlica");
 }
 
-if (wojewodztwo.value == "")
+if (!regMiasto.test(miasto) || miasto.length < 2 || miasto.length > 50)
 {
-    blad(wojewodztwo, "Wybierz województwo!");
+    blad("miasto", "bladMiasto", "Miasto musi mieć od 2 do 50 znaków i maksymalnie 4 człony.");
     poprawny = false;
 }
-
-if (!regHaslo.test(haslo.value))
+else
 {
-    blad(haslo, "Hasło musi mieć minimum 8 znaków, w tym literę i cyfrę!");
-    poprawny = false;
+    usunBlad("miasto", "bladMiasto");
 }
 
-if (!regEmail.test(email.value))
+if (data == "")
 {
-    blad(email, "Podaj poprawny adres e-mail!");
+    blad("data", "bladData", "Podaj datę urodzenia");
     poprawny = false;
 }
-
-if (uwagi.value.length > 250)
+else
 {
-    blad(uwagi, "Uwagi mogą mieć maksymalnie 250 znaków!");
+    usunBlad("data", "bladData");
+}
+
+if (!regTelefon.test(telefon))
+{
+    blad("telefon", "bladTelefon", "Telefon musi mieć dokładnie 9 cyfr");
     poprawny = false;
+}
+else
+{
+    usunBlad("telefon", "bladTelefon");
+}
+
+if (wojewodztwo == "")
+{
+    blad("wojewodztwo", "bladWojewodztwo", "Wybierz województwo");
+    poprawny = false;
+}
+else
+{
+    usunBlad("wojewodztwo", "bladWojewodztwo");
+}
+
+if (!regHaslo.test(haslo))
+{
+    blad("haslo", "bladHaslo", "Hasło musi mieć minimum 8 znaków, w tym literę i cyfrę");
+    poprawny = false;
+}
+else
+{
+    usunBlad("haslo", "bladHaslo");
+}
+
+if (!regEmail.test(email))
+{
+    blad("email", "bladEmail", "Podaj poprawny adres e-mail");
+    poprawny = false;
+}
+else
+{
+    usunBlad("email", "bladEmail");
+}
+
+if (uwagi.length > 250)
+{
+    blad("uwagi", "bladUwagi", "Uwagi mogą mieć maksymalnie 250 znaków");
+    poprawny = false;
+}
+else
+{
+    usunBlad("uwagi", "bladUwagi");
 }
 
 return poprawny;
