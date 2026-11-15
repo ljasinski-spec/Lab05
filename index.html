@@ -85,6 +85,21 @@ font-size: 14px;
 margin-bottom: 9px;
 color: red;
 }
+.adres
+{
+display: flex;
+gap: 5px;
+}
+.ulica
+{
+flex: 65;
+min-width: 0;
+}
+.numer
+{
+flex: 35;
+min-width: 0;
+}
 </style>
 </head>
 
@@ -98,8 +113,20 @@ Imie: <input type="text" name="imie" id="imie" minlength="2" maxlength="30" onin
 Nazwisko: <input type="text" name="nazwisko" id="nazwisko" minlength="2" maxlength="50" oninput="usunblad('bladNazwisko','nazwisko')">
 <div id="bladNazwisko" class="komunikat"></div>
 
-Ulica: <input type="text" name="ulica" id="ulica" minlength="2" maxlength="50" oninput="usunblad('bladUlica','ulica')">
+<div class="adres">
+<div class="ulica">
+Ulica:
+<input type="text" name="ulica" id="ulica" minlength="2" maxlength="50" oninput="usunblad('bladUlica','ulica')">
 <div id="bladUlica" class="komunikat"></div>
+</div>
+
+<div class="numer">
+Nr budynku:
+<input type="text" name="numer" id="numer" maxlength="10" oninput="usunblad('bladNumer','numer')">
+<div id="bladNumer" class="komunikat"></div>
+</div>
+</div>
+
 
 Miasto: <input type="text" name="miasto" id="miasto" minlength="2" maxlength="50" oninput="usunblad('bladMiasto','miasto')">
 <div id="bladMiasto" class="komunikat"></div>
@@ -192,14 +219,16 @@ var haslo=document.getElementById("haslo").value;
 var email=document.getElementById("email").value;
 var uwagi=document.getElementById("uwagi").value;
 var poprawny=true;
+var numerBudynku=document.getElementById("numer").value;
 
 var regImie = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+$/;
 var regNazwisko = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
-var regUlica = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)*( [0-9]+(\/[0-9]+)?)?$/;
+var regUlica = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)*$/;
 var regMiasto = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃŃÓŚŹŻ][a-ząćęłńóśźż]+){0,3}$/;
 var regTelefon = /^[0-9]{9}$/;
 var regHaslo = /^.+$/;
 var regEmail = /^[a-zA-Z]([a-zA-Z0-9]|[._-][a-zA-Z0-9])+@[a-zA-Z0-9-]+[.][a-zA-Z]{2,}$/;
+var regNumer = /^[0-9]+[a-zA-Z]?(\/[0-9]+)?$/;
 
 if(!waliduj(imie,regImie,2,30,"bladImie","Imię musi zaczynać się wielką literą i mieć od 2 do 30 znaków","imie"))
 {
@@ -211,7 +240,7 @@ if(!waliduj(nazwisko,regNazwisko,2,50,"bladNazwisko","Nazwisko musi zaczynać si
     poprawny=false;
 }
 
-if(!waliduj(ulica,regUlica,2,50,"bladUlica","Ulica musi zaczynać się wielką literą i mieć od 2 do 50 znaków. Numer budynku musi być oddzielony spacją","ulica"))
+if(!waliduj(ulica,regUlica,2,50,"bladUlica","Ulica musi zaczynać się wielką literą, mieć od 2 do 50 znaków i zawierać wyłącznie litery.","ulica"))
 {
     poprawny=false;
 }
@@ -269,6 +298,10 @@ if(uwagi.length>250)
 else
 {
     usunblad("bladUwagi","uwagi")
+}
+if(!waliduj(numerBudynku,regNumer,1,10,"bladNumer","Podaj poprawny numer budynku, np. 12, 12A lub 12/5","numer"))
+{
+    poprawny=false;
 }
 
 return poprawny
