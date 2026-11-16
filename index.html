@@ -228,7 +228,7 @@ var regUlica = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘ�
 var regMiasto = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+([ -][A-ZĄĆĘŁŃŃÓŚŹŻ][a-ząćęłńóśźż]+){0,3}$/;
 var regTelefon = /^[0-9]{9}$/;
 var regHaslo = /^.*$/;
-var regEmail = /^[a-zA-Z0-9]([a-zA-Z0-9]|[._-][a-zA-Z0-9])+@[a-zA-Z0-9-]+[.][a-zA-Z]{2,}$/;
+var regEmail = /^[a-zA-Z0-9]([a-zA-Z0-9]|[._-][a-zA-Z0-9])+[@][a-zA-Z0-9-]+[.][a-zA-Z]{2,}$/;
 var regNumer = /^[0-9]+[a-zA-Z]?(\/[0-9]+)?$/;
 
 if(!waliduj(imie,regImie,2,30,"bladImie","Imię musi zaczynać się wielką literą i mieć od 2 do 30 znaków","imie"))
